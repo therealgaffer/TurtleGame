@@ -50,6 +50,7 @@ def player_move_right():
 # Keybinds
 turtle.listen()
 turtle.onkey(player_move_left, "Left")
+turtle.onkey(player_move_right, "Right")
 
 
 
