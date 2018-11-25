@@ -37,20 +37,49 @@ enemy.goto(0, 200)
 # Move player left and right
 playerspeed = 15
 
+
 def player_move_left():
     x = player.xcor()
     x -= playerspeed
     player.setx(x)
 
+    if x < -285:
+        player.setx(-285)
+
+
 def player_move_right():
-    y = player.ycor()
-    y += playerspeed
-    player.sety(y)
+    x = player.xcor()
+    x += playerspeed
+    player.setx(x)
+
+    if x > 285:
+        player.setx(285)
+
 
 # Keybinds
-turtle.listen()
-turtle.onkey(player_move_left, "Left")
-turtle.onkey(player_move_right, "Right")
+main_window.listen()
+main_window.onkey(player_move_left, "Left")
+main_window.onkey(player_move_right, "Right")
+
+enemyspeed = 2
+
+while True:
+    # Move the enemy
+    x = enemy.xcor()
+    x += enemyspeed
+    enemy.setx(x)
+
+    # Enemy changes direction at border, moves down, and speeds up
+    if x > 285 or x < -285:
+        y = enemy.ycor()
+        y -= 15
+        enemy.sety(y)
+        enemyspeed *= -1
+
+        if enemyspeed < 0:
+            enemyspeed -= 0.1
+        else:
+            enemyspeed += 0.1
 
 
 
@@ -59,4 +88,11 @@ turtle.onkey(player_move_right, "Right")
 
 
 
-input("Press enter to finish")
+
+
+
+
+
+
+
+delay = main_window.mainloop()
